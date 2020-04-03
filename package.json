@@ -1,0 +1,23 @@
+{
+	"name": "aware19",
+	"version": "0.0.0",
+	"description": "Has eyes everywhere",
+	"author": {
+		"name": "Antoine Coulon",
+		"url": "https://antoinecoulon.com",
+		"email": "contact@cln.ac"
+	},
+	"main": "src/App.js",
+	"scripts": {
+		"dev": "nodemon src/App.js"
+	},
+	"dependencies": {
+		"axios": "^0.19.2",
+		"cron": "^1.8.2",
+		"discord.js": "^11.5.1",
+		"mongoose": "^5.9.2"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.2"
+	}
+}
