@@ -9,7 +9,8 @@
 	},
 	"main": "src/App.js",
 	"scripts": {
-		"dev": "nodemon src/App.js"
+		"dev": "nodemon ./src/App.js",
+		"start": "node ./src/App.js"
 	},
 	"dependencies": {
 		"axios": "^0.19.2",
