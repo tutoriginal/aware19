@@ -6,7 +6,7 @@
 /*   By: ancoulon <ancoulon@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:59:13 by ancoulon          #+#    #+#             */
-/*   Updated: 2020/03/29 15:56:03 by ancoulon         ###   ########.fr       */
+/*   Updated: 2020/04/04 10:42:25 by ancoulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ const config = require("../config");
 const embed = require("./assets/embed");
 const commands = require("./assets/commands");
 const database = require("./assets/database");
+const express = require("express");
 
 
 
@@ -81,3 +82,26 @@ client.on('message', (message) => {
 	});
 
 });
+
+
+
+
+// Express
+
+const server = express();
+
+server.get('/', (req, res) => {
+	res.send("Aware19 landing page.");
+});
+
+server.use((req, res, next) => {
+
+    const err = new Error("Not Found");
+
+    err.status = 404;
+
+    next(err);
+
+});
+
+server.listen(config.http.port);

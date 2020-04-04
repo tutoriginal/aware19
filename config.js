@@ -6,7 +6,7 @@
 /*   By: ancoulon <ancoulon@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 16:06:32 by ancoulon          #+#    #+#             */
-/*   Updated: 2020/04/03 20:48:40 by ancoulon         ###   ########.fr       */
+/*   Updated: 2020/04/04 10:42:59 by ancoulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ const development = {
 	api42: {
 		uid: process.env.UID_42,
 		secret: process.env.SECRET_42
+	},
+	http: {
+		port: 8080
 	}
+
 }
 
 const production = {
@@ -43,6 +47,9 @@ const production = {
 	api42: {
 		uid: process.env.UID_42,
 		secret: process.env.SECRET_42
+	},
+	http: {
+		port: process.env.PORT
 	}
 };
 
