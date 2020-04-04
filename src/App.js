@@ -6,7 +6,7 @@
 /*   By: ancoulon <ancoulon@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:59:13 by ancoulon          #+#    #+#             */
-/*   Updated: 2020/04/04 11:01:14 by ancoulon         ###   ########.fr       */
+/*   Updated: 2020/04/04 11:17:44 by ancoulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ client.on('message', (message) => {
 	if (cmd.requiredRole && !message.member.roles.find('id', cmd.requiredRole)) {
 		message.react('🚫');
 		message.channel.send(embed.errorEmbed("You do not have the right to use this command"));
+		return;
+	}
+
+	if (cmd.requiredArgs !== null && cmd.requiredArgs + 1 != args.length) {
+		message.react('🚫');
+		message.channel.send(embed.errorEmbed("Invalid number of arguments"));
 		return;
 	}
 
