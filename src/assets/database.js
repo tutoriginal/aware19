@@ -6,7 +6,7 @@
 /*   By: ancoulon <ancoulon@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:49:33 by ancoulon          #+#    #+#             */
-/*   Updated: 2020/04/03 20:49:22 by ancoulon         ###   ########.fr       */
+/*   Updated: 2020/04/04 10:47:15 by ancoulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ const config = require("../../config");
 
 // Connection
 
-mongoose.connect(config.mongo.uri, {useNewUrlParser: true, useUnifiedTopology: true});
-
+mongoose
+	.connect(config.mongo.uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true })
+	.then(() => console.log('Database Connected'))
+	.catch(err => console.log(err));
 
 
 // Schemas
@@ -39,8 +41,8 @@ const UserSchema = new Schema({
 	login_42: { type: String },
 
 	nickname: { type: String }
-	
-}, {collection: "users"});
+
+}, { collection: "users" });
 
 const User = mongoose.model("User", UserSchema);
 
