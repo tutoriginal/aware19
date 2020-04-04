@@ -6,7 +6,7 @@
 /*   By: ancoulon <ancoulon@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:59:13 by ancoulon          #+#    #+#             */
-/*   Updated: 2020/04/04 10:49:17 by ancoulon         ###   ########.fr       */
+/*   Updated: 2020/04/04 11:01:14 by ancoulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,24 @@ client.on('message', (message) => {
 	const args = message.content.slice(config.discord.prefix.length).split(' ');
 	args.shift();
 
-	if (args.length < 1) { return; }
+	if (args.length < 1) { 
+		message.react('🚫');
+		message.channel.send(embed.errorEmbed("No command given"));
+		return;
+	}
 
 	let cmd = client.commands.get(args[0].toLowerCase());
 
-	if (!cmd) { return; }
-	if (cmd.requiredRole && !message.member.roles.find('id', cmd.requiredRole)) { return; }
+	if (!cmd) {
+		message.react('🚫');
+		message.channel.send(embed.errorEmbed("This command does not exist"));
+		return;
+	}
+	if (cmd.requiredRole && !message.member.roles.find('id', cmd.requiredRole)) {
+		message.react('🚫');
+		message.channel.send(embed.errorEmbed("You do not have the right to use this command"));
+		return;
+	}
 
 	args.shift();
 	cmd.execute(message, args).then(() => {
