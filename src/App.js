@@ -6,7 +6,7 @@
 /*   By: ancoulon <ancoulon@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 15:59:13 by ancoulon          #+#    #+#             */
-/*   Updated: 2020/04/04 10:42:25 by ancoulon         ###   ########.fr       */
+/*   Updated: 2020/04/04 10:49:17 by ancoulon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,12 @@ client.on('message', (message) => {
 	const args = message.content.slice(config.discord.prefix.length).split(' ');
 	args.shift();
 
-	if (args.length < 1)
-		throw new Error("Command not specified");
+	if (args.length < 1) { return; }
 
 	let cmd = client.commands.get(args[0].toLowerCase());
 
-	if (!cmd)
-		throw new Error("`" + args[0] + "` is not a valid command");
-
-	if (cmd.requiredRole && !message.member.roles.find('id', cmd.requiredRole))
-		throw new Error("You do not have the permission to use this command");
+	if (!cmd) { return; }
+	if (cmd.requiredRole && !message.member.roles.find('id', cmd.requiredRole)) { return; }
 
 	args.shift();
 	cmd.execute(message, args).then(() => {
@@ -96,11 +92,11 @@ server.get('/', (req, res) => {
 
 server.use((req, res, next) => {
 
-    const err = new Error("Not Found");
+	const err = new Error("Not Found");
 
-    err.status = 404;
+	err.status = 404;
 
-    next(err);
+	next(err);
 
 });
 
